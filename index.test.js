@@ -23,10 +23,16 @@ describe('./musicians endpoint', () => {
         expect(typeof responseData).toBe("object");
     })
     
-    
-
-
-
 
     
+})
+
+describe("Musicians route", () =>{
+    test("it returns a musician by id", async ()=>{
+        const res = await request(app).get("/musicians/2");
+        expect(res.body).toHaveProperty("name", "Drake");
+    })
+
+
+
 })
