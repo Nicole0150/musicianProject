@@ -16,6 +16,27 @@ app.get("/musicians/:id", async (req, res) =>{
     res.json(musician);
 })
 
+app.use(express.json());
+app.use(express.urlencoded());
+
+app.post("/musicians", async (req, res) =>{
+    const newMusic = await Musician.create(req.body);
+    res.json(newMusic);
+})
+
+app.put("/musicians/:id", async (req, res) =>{
+    const route = req.params.id;
+    const replace = await Musician.update(req.body, {where: {id: route}})
+    res.json(replace);
+})
+
+app.delete("/musicians/:id", async(req, res) =>{
+    const route = req.params.id;
+    const del = await Musician.destroy({where: {id: route}});
+    res.json(del);
+})
+
+
 //TODO: Create a GET /musicians route to return all musicians 
 
 
